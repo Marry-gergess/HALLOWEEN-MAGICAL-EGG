@@ -6,9 +6,9 @@
 }
 
 body {
-    /* الخلفية السحرية مع طبقة تظليل لتوضيح الكلام */
     background: linear-gradient(rgba(10, 4, 25, 0.65), rgba(7, 2, 16, 0.85)), 
-                url('images/bg.png');
+                url('images/bg.png'),
+                radial-gradient(circle at center, #2b1055 0%, #12072b 70%, #070210 100%);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -24,7 +24,7 @@ body {
 }
 
 .magical-container {
-    background: rgba(20, 10, 40, 0.75);
+    background: rgba(20, 10, 40, 0.8);
     border: 2px solid #d4af37;
     border-radius: 20px;
     padding: 35px 25px;
@@ -43,45 +43,8 @@ h1 {
 
 .subtitle {
     color: #dcd0ff;
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin-bottom: 25px;
-}
-
-.inputs-section {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.input-box input {
-    width: 90%;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid #d4af37;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 1rem;
-    text-align: center;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.input-box input::placeholder {
-    color: #b5a8d5;
-}
-
-.input-box input:focus {
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 12px rgba(245, 215, 110, 0.6);
-}
-
-.error-msg {
-    color: #ff6b6b;
-    font-size: 0.95rem;
-    min-height: 24px;
-    margin-bottom: 10px;
-    font-weight: bold;
 }
 
 .egg-stage {
@@ -169,7 +132,7 @@ h1 {
     border: 2px dashed #d4af37;
     border-radius: 15px;
     padding: 25px 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -187,17 +150,12 @@ h1 {
 
 .pet-card h3 {
     color: #f5d76e;
-    font-size: 1.4rem;
-    margin-bottom: 8px;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
 }
 
 .pet-card p {
     color: #dcd0ff;
     font-size: 0.95rem;
     line-height: 1.5;
-}
-
-.sheet-status {
-    font-size: 0.9rem;
-    color: #a7f3d0;
 }
