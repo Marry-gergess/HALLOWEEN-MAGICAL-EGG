@@ -3,20 +3,14 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySO0Hrz5WCAE1Tz8BFL
 
 // 2. قائمة الحيوانات السحرية (تقدري تعدلي الاسم والوصف والنسبة لكل حيوان براحتك)
 const magicalPets = [
-    // --- فئة عادية (60%) ---
     { 
-        name: "الحيوان الأول (اكتبي اسمه هنا)", 
-        eggType: "بيضة عادية",
-        chance: 35, 
+        name: "Black dog (halloween)", 
         img: "images/animal1.png", 
-        desc: "وصف الحيوان الأول يكتب هنا..." 
     },
     { 
-        name: "الحيوان الثاني (اكتبي اسمه هنا)", 
-        eggType: "بيضة عادية",
-        chance: 25, 
+        name: "Black owl (Halloween)", 
         img: "images/animal2.png", 
-        desc: "وصف الحيوان الثاني يكتب هنا..." 
+         
     },
 
     // --- فئة نادرة (30%) ---
