@@ -30,7 +30,7 @@ const magicalPets = [
         img: "images/animal6.png"
     },
     { 
-        name: "بومة سوداء", 
+        name: "قطة سوداء", 
         chance: 16, 
         img: "images/animal7.png"
     }
