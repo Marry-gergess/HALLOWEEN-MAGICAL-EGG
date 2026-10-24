@@ -1,54 +1,54 @@
 // 1. رابط Google Sheet Web App
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySO0Hrz5WCAE1Tz8BFLYg9wt5rDg9CBXtRaghMfS2p-SxHlA8XPql3fI0ThfpxbYYK/exec";
 
-// 2. قائمة الحيوانات السحرية مع نسبة الظهور (chance) ونوع الفئة للعرض على الشاشة
+// 2. قائمة الحيوانات السحرية (تقدري تعدلي الاسم والوصف والنسبة لكل حيوان براحتك)
 const magicalPets = [
     // --- فئة عادية (60%) ---
     { 
-        name: "بافسكين (Puffskein)", 
+        name: "الحيوان الأول (اكتبي اسمه هنا)", 
         eggType: "بيضة عادية",
         chance: 35, 
-        img: "images/puffskein.png", 
-        desc: "كائن كروي ناعم ولطيف يحبه جميع السحرة." 
+        img: "images/animal1.png", 
+        desc: "وصف الحيوان الأول يكتب هنا..." 
     },
     { 
-        name: "البومة الثلجية", 
+        name: "الحيوان الثاني (اكتبي اسمه هنا)", 
         eggType: "بيضة عادية",
         chance: 25, 
-        img: "images/owl.png", 
-        desc: "رفيق وفي وذكي لتوصيل الرسائل السحرية." 
+        img: "images/animal2.png", 
+        desc: "وصف الحيوان الثاني يكتب هنا..." 
     },
 
     // --- فئة نادرة (30%) ---
     { 
-        name: "نيفلر (Niffler)", 
+        name: "الحيوان الثالث (اكتبي اسمه هنا)", 
         eggType: "بيضة نادرة ✨",
         chance: 18, 
-        img: "images/niffler.png", 
-        desc: "كائن ظريف يعشق كل الأشياء اللامعة والذهب!" 
+        img: "images/animal3.png", 
+        desc: "وصف الحيوان الثالث يكتب هنا..." 
     },
     { 
-        name: "هيبوجريف (Hippogriff)", 
+        name: "الحيوان الرابع (اكتبي اسمه هنا)", 
         eggType: "بيضة نادرة ✨",
         chance: 12, 
-        img: "images/hippogriff.png", 
-        desc: "مخلوق مهيب نصفه نسر ونصفه حصان، يحترم من يحترمه." 
+        img: "images/animal4.png", 
+        desc: "وصف الحيوان الرابع يكتب هنا..." 
     },
 
     // --- فئة أسطورية (10%) ---
     { 
-        name: "تنين الهورنيل المجري", 
+        name: "الحيوان الخامس (اكتبي اسمه هنا)", 
         eggType: "بيضة أسطورية 🔥",
         chance: 7, 
-        img: "images/dragon.png", 
-        desc: "من أقوى وأخطر المخلوقات السحرية على الإطلاق!" 
+        img: "images/animal5.png", 
+        desc: "وصف الحيوان الخامس يكتب هنا..." 
     },
     { 
-        name: "فوكس (العنقاء)", 
+        name: "الحيوان السادس (اكتبي اسمه هنا)", 
         eggType: "بيضة أسطورية 👑",
         chance: 3, 
-        img: "images/phoenix.png", 
-        desc: "كائن أسطوري خارق يتجدد من الرماد!" 
+        img: "images/animal6.png", 
+        desc: "وصف الحيوان السادس يكتب هنا..." 
     }
 ];
 
