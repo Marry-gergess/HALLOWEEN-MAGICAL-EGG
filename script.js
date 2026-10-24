@@ -1,49 +1,38 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-VB_ZThn4gBA-opwc0HcNwU-Ht5f0R754Ex4sf8C-qilCBfi7OvtmMoz6bo6nM5jG/exec";
-
 const magicalPets = [
     { 
         name: "كلب أسود", 
-        chance: 35, 
-        img: "images/animal1.png", 
+        chance: 16, 
+        img: "images/animal1.png"
     },
     { 
         name: "بومة سوداء", 
-        eggType: "بيضة عادية",
-        chance: 25, 
-        img: "images/animal2.png", 
-        desc: "وصف الحيوان الثاني يكتب هنا..." 
-    },
-
-    // --- فئة نادرة (30%) ---
-    { 
-        name: "الحيوان الثالث", 
-        eggType: "بيضة نادرة ✨",
-        chance: 18, 
-        img: "images/animal3.png", 
-        desc: "وصف الحيوان الثالث يكتب هنا..." 
+        chance: 16, 
+        img: "images/animal2.png"
     },
     { 
-        name: "الحيوان الرابع", 
-        eggType: "بيضة نادرة ✨",
-        chance: 12, 
-        img: "images/animal4.png", 
-        desc: "وصف الحيوان الرابع يكتب هنا..." 
-    },
-
-    // --- فئة أسطورية (10%) ---
-    { 
-        name: "الحيوان الخامس", 
-        eggType: "بيضة أسطورية 🔥",
-        chance: 7, 
-        img: "images/animal5.png", 
-        desc: "وصف الحيوان الخامس يكتب هنا..." 
+        name: "غراب أسود", 
+        chance: 16, 
+        img: "images/animal3.png"
     },
     { 
-        name: "الحيوان السادس", 
-        eggType: "بيضة أسطورية 👑",
-        chance: 3, 
-        img: "images/animal6.png", 
-        desc: "وصف الحيوان السادس يكتب هنا..." 
+        name: "غراب", 
+        chance: 16, 
+        img: "images/animal4.png"
+    },
+    { 
+        name: "جلامبامبل", 
+        chance: 10, // أقل بحاجة بسيطة
+        img: "images/animal5.png"
+    },
+    { 
+        name: "بيلي ويج", 
+        chance: 10, // أقل بحاجة بسيطة
+        img: "images/animal6.png"
+    },
+    { 
+        name: "بومة سوداء", 
+        chance: 16, 
+        img: "images/animal7.png"
     }
 ];
 
@@ -97,34 +86,16 @@ function crackEgg() {
         const resultStage = document.getElementById("resultStage");
         resultStage.style.display = "block";
 
-        // إظهار صورة الحيوان وبياناته
+        // إظهار صورة الحيوان واسمه فقط بدون كلمة undefined
         document.getElementById("petImg").src = selectedPet.img;
-        document.getElementById("petName").innerText = `${selectedPet.name} (${selectedPet.eggType})`;
-        document.getElementById("petDesc").innerText = selectedPet.desc;
+        document.getElementById("petName").innerText = selectedPet.name;
+        document.getElementById("petDesc").innerText = selectedPet.desc || "";
 
-        // إرسال الـ 3 أعمدة للشيت:
-        // Name | Ticket num | Animal name
-        sendToGoogleSheet(wizardName, ticketNum, selectedPet.name);
+        // إظهار بيانات الساحر ورقم التيكت تحت النتيجة عشان لو هياخدوا سكرين شوت للتيكت
+        const statusText = document.getElementById("sheetStatus");
+        if (statusText) {
+            statusText.innerText = `✨ الساحر/ة: ${wizardName} | تيكت رقم: ${ticketNum} ✨`;
+            statusText.style.color = "#f5d76e";
+        }
     }, 1500);
-}
-
-function sendToGoogleSheet(name, ticketNum, animalName) {
-    const statusText = document.getElementById("sheetStatus");
-
-    // وضع البيانات داخل الرابط مباشرة لضمان وصولها 100%
-    const url = `${SCRIPT_URL}?name=${encodeURIComponent(name)}&ticketNum=${encodeURIComponent(ticketNum)}&animalName=${encodeURIComponent(animalName)}`;
-
-    fetch(url, {
-        method: "GET",
-        mode: "no-cors"
-    })
-    .then(() => {
-        statusText.innerText = "✅ تم تسجيل حيوانك السحري وتذكرتك في السجلات بنجاح!";
-        statusText.style.color = "#a7f3d0";
-    })
-    .catch(error => {
-        console.error("Error!", error);
-        statusText.innerText = "⚠️ ظهر الحيوان ولكن تعذر حفظه في السجل، تأكدي من الرابط.";
-        statusText.style.color = "#fca5a5";
-    });
 }
