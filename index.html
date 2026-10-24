@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر آل بوتر للحيوانات السحرية</title>
+    <!-- خط عربي يناسب الطابع السحري -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="magical-container">
+        <h1>✨ متجر آل بوتر للحيوانات السحرية ✨</h1>
+        <p class="subtitle">أدخل بياناتك السحرية أولاً، ثم اضغط على البيضة لفتحها!</p>
+
+        <!-- خانات إدخال البيانات -->
+        <div class="inputs-section" id="inputsSection">
+            <div class="input-box">
+                <input type="text" id="wizardName" placeholder="اسم الساحر أو الساحرة..." autocomplete="off">
+            </div>
+
+            <div class="input-box">
+                <input type="text" id="wizardHouse" placeholder="المنزل السحري (جريفندور، هافلباف...)" autocomplete="off">
+            </div>
+        </div>
+
+        <!-- رسالة تنبيه في حال نسيان البيانات -->
+        <p id="errorMsg" class="error-msg"></p>
+
+        <!-- قسم البيضة الواحدة -->
+        <div class="egg-stage" id="eggStage">
+            <div class="egg-card" id="eggCard" onclick="crackEgg()">
+                <div class="glow-effect"></div>
+                <img id="eggImg" src="images/common-egg.png" alt="البيضة السحرية">
+                <h3>البيضة السحرية</h3>
+                <span class="click-hint">اضغط لفتح البيضة 🪄</span>
+            </div>
+        </div>
+
+        <!-- قسم ظهور النتيجة بعد فتح البيضة -->
+        <div class="result-stage" id="resultStage">
+            <h2 class="congrats-title">🎉 مبروك! لقد فقست البيضة 🎉</h2>
+            <div class="pet-card">
+                <img id="petImg" src="" alt="حيوانك السحري">
+                <h3 id="petName"></h3>
+                <p id="petDesc"></p>
+            </div>
+            <p id="sheetStatus" class="sheet-status">⏳ جاري تسجيل حيوانك في السجلات السحرية...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
