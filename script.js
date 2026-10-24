@@ -112,25 +112,29 @@ function crackEgg() {
         sendToGoogleSheet(wizardName, ticketNum, selectedPet.name);
     }, 1500);
 }
-
 function sendToGoogleSheet(name, ticketNum, animalName) {
     const statusText = document.getElementById("sheetStatus");
 
-    const formData = new FormData();
-    formData.append("name", name);             // يذهب لعمود Name
-    formData.append("ticketNum", ticketNum);   // يذهب لعمود Ticket num
-    formData.append("animalName", animalName); // يذهب لعمود Animal name
+    // تجهيز البيانات بصيغة يقرأها Google Apps Script دائماً بدون مشاكل
+    const params = new URLSearchParams();
+    params.append("name", name);
+    params.append("ticketNum", ticketNum);
+    params.append("animalName", animalName);
 
     fetch(SCRIPT_URL, {
         method: "POST",
-        body: formData
+        mode: "no-cors", // يمنع المتصفح من حظر الإرسال للشيت
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: params.toString()
     })
-    .then(response => {
+    .then(() => {
         statusText.innerText = "✅ تم تسجيل حيوانك السحري وتذكرتك في السجلات بنجاح!";
         statusText.style.color = "#a7f3d0";
     })
     .catch(error => {
-        console.error("Error!", error.message);
+        console.error("Error!", error);
         statusText.innerText = "⚠️ ظهر الحيوان ولكن تعذر حفظه في السجل، تأكدي من الرابط.";
         statusText.style.color = "#fca5a5";
     });
