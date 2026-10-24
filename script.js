@@ -1,5 +1,5 @@
 // 1. رابط Google Sheet Web App الجديد
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwH8ICS5vXh8PGouoRKBC1H6bI0sWLsvO52SpVHodCClAOCV1nMlOiOK4bbfIKIHws/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwfqgEsM1yJZjbmbwY4q8GbvN86P8YWrLO7mgbaFKJ9Q62-qIfVcQkWaWK8heFQ-dEG/exec";
 
 // 2. قائمة الحيوانات السحرية (تقدري تعدلي الاسم والوصف والنسبة لكل حيوان براحتك)
 const magicalPets = [
