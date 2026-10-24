@@ -1,60 +1,60 @@
-// 1. Rabit el-Google Sheet Web App el-gaded el-li bahtih
+// 1. رابط Google Sheet Web App
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySO0Hrz5WCAE1Tz8BFLYg9wt5rDg9CBXtRaghMfS2p-SxHlA8XPql3fI0ThfpxbYYK/exec";
 
-// 2. Qa'emat el-hayawanat el-sehreya m'a nesbat el-zohour (chance) w no' el-beida (eggType)
+// 2. قائمة الحيوانات السحرية مع نسبة الظهور (chance) ونوع الفئة للعرض على الشاشة
 const magicalPets = [
-    // --- Fe'ah adia (60%) ---
+    // --- فئة عادية (60%) ---
     { 
-        name: "Puffskein", 
-        eggType: "Beida Adia",
+        name: "بافسكين (Puffskein)", 
+        eggType: "بيضة عادية",
         chance: 35, 
         img: "images/puffskein.png", 
-        desc: "Ka'en korawy na'em we lateef yeheboh gami' el-sahra." 
+        desc: "كائن كروي ناعم ولطيف يحبه جميع السحرة." 
     },
     { 
-        name: "El-Boma el-thalgeya", 
-        eggType: "Beida Adia",
+        name: "البومة الثلجية", 
+        eggType: "بيضة عادية",
         chance: 25, 
         img: "images/owl.png", 
-        desc: "Rafeeq wafy we zakey li-tawseel el-rasael el-sehreya." 
+        desc: "رفيق وفي وذكي لتوصيل الرسائل السحرية." 
     },
 
-    // --- Fe'ah nadera (30%) ---
+    // --- فئة نادرة (30%) ---
     { 
-        name: "Niffler", 
-        eggType: "Beida Nadera ✨",
+        name: "نيفلر (Niffler)", 
+        eggType: "بيضة نادرة ✨",
         chance: 18, 
         img: "images/niffler.png", 
-        desc: "Ka'en zareef ye'shaq kol el-ashya' el-lame'ah we el-zahab!" 
+        desc: "كائن ظريف يعشق كل الأشياء اللامعة والذهب!" 
     },
     { 
-        name: "Hippogriff", 
-        eggType: "Beida Nadera ✨",
+        name: "هيبوجريف (Hippogriff)", 
+        eggType: "بيضة نادرة ✨",
         chance: 12, 
         img: "images/hippogriff.png", 
-        desc: "Makhlooq moheeb nesfoh nasr we nesfoh hosan, yahtarem man yahtaremoh." 
+        desc: "مخلوق مهيب نصفه نسر ونصفه حصان، يحترم من يحترمه." 
     },
 
-    // --- Fe'ah ostoreya (10%) ---
+    // --- فئة أسطورية (10%) ---
     { 
-        name: "Teneen el-Horneel el-Maghry", 
-        eggType: "Beida Ostoreya 🔥",
+        name: "تنين الهورنيل المجري", 
+        eggType: "بيضة أسطورية 🔥",
         chance: 7, 
         img: "images/dragon.png", 
-        desc: "Min aqwa we akhtar el-makhlooqat el-sehreya 'ala el-itlaq!" 
+        desc: "من أقوى وأخطر المخلوقات السحرية على الإطلاق!" 
     },
     { 
-        name: "Fawkes (El-'Anqaa')", 
-        eggType: "Beida Ostoreya 👑",
+        name: "فوكس (العنقاء)", 
+        eggType: "بيضة أسطورية 👑",
         chance: 3, 
         img: "images/phoenix.png", 
-        desc: "Ka'en ostorey khariq yatgaddad min el-ramad!" 
+        desc: "كائن أسطوري خارق يتجدد من الرماد!" 
     }
 ];
 
 let isOpening = false;
 
-// Dala ikhtiyar el-hayawan bena'an 'ala el-nesba el-meowia
+// دالة اختيار الحيوان بناءً على النسبة المئوية
 function getPetByPercentage() {
     const totalChance = magicalPets.reduce((sum, pet) => sum + pet.chance, 0);
     let randomNum = Math.random() * totalChance;
@@ -79,7 +79,7 @@ function crackEgg() {
     const ticketNum = ticketInput.value.trim();
 
     if (!wizardName || !ticketNum) {
-        errorMsg.innerText = "⚠️ Taweetha naqesa! Yarja' edkhal el-esm we raqm el-tazkara awwalan.";
+        errorMsg.innerText = "⚠️ تعويذة ناقصة! يرجى إدخال الاسم ورقم تيكت الديسكورد أولاً.";
         return;
     }
 
@@ -90,9 +90,9 @@ function crackEgg() {
 
     const eggCard = document.getElementById("eggCard");
     eggCard.classList.add("shake-animation");
-    document.querySelector(".click-hint").innerText = "Gary faqs el-beida... ✨";
+    document.querySelector(".click-hint").innerText = "جاري فقس البيضة... ✨";
 
-    // Ikhtiyar el-hayawan bi el-nesba el-meowia
+    // اختيار الحيوان بالنسبة المئوية
     const selectedPet = getPetByPercentage();
 
     setTimeout(() => {
@@ -102,36 +102,36 @@ function crackEgg() {
         const resultStage = document.getElementById("resultStage");
         resultStage.style.display = "block";
 
+        // إظهار صورة الحيوان وبياناته
         document.getElementById("petImg").src = selectedPet.img;
         document.getElementById("petName").innerText = `${selectedPet.name} (${selectedPet.eggType})`;
         document.getElementById("petDesc").innerText = selectedPet.desc;
 
-        // Ersal el-arbaa' a'moud le el-sheet:
-        // Name | Ticket num | Egg Type | Animal name
-        sendToGoogleSheet(wizardName, ticketNum, selectedPet.eggType, selectedPet.name);
+        // إرسال الـ 3 أعمدة فقط للشيت:
+        // Name | Ticket num | Animal name
+        sendToGoogleSheet(wizardName, ticketNum, selectedPet.name);
     }, 1500);
 }
 
-function sendToGoogleSheet(name, ticketNum, eggType, animalName) {
+function sendToGoogleSheet(name, ticketNum, animalName) {
     const statusText = document.getElementById("sheetStatus");
 
     const formData = new FormData();
-    formData.append("name", name);             // Yezehab le 'amoud Name
-    formData.append("ticketNum", ticketNum);   // Yezehab le 'amoud Ticket num
-    formData.append("eggType", eggType);       // Yezehab le 'amoud Egg Type
-    formData.append("animalName", animalName); // Yezehab le 'amoud Animal name
+    formData.append("name", name);             // يذهب لعمود Name
+    formData.append("ticketNum", ticketNum);   // يذهب لعمود Ticket num
+    formData.append("animalName", animalName); // يذهب لعمود Animal name
 
     fetch(SCRIPT_URL, {
         method: "POST",
         body: formData
     })
     .then(response => {
-        statusText.innerText = "✅ Tem tasgeel haywanak el-sehrey we tazkaratak fi el-segillat bengah!";
+        statusText.innerText = "✅ تم تسجيل حيوانك السحري وتذكرتك في السجلات بنجاح!";
         statusText.style.color = "#a7f3d0";
     })
     .catch(error => {
         console.error("Error!", error.message);
-        statusText.innerText = "⚠️ Zahara el-hayawan walakenn ta'azzara hefzoh fi el-segl, ta'akkady min el-rabit.";
+        statusText.innerText = "⚠️ ظهر الحيوان ولكن تعذر حفظه في السجل، تأكدي من الرابط.";
         statusText.style.color = "#fca5a5";
     });
 }
