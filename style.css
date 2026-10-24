@@ -1,0 +1,192 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, #2b1055 0%, #12072b 70%, #070210 100%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.magical-container {
+    background: rgba(20, 10, 40, 0.75);
+    border: 2px solid #d4af37;
+    border-radius: 20px;
+    padding: 35px 25px;
+    max-width: 550px;
+    width: 100%;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.25), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+h1 {
+    color: #f5d76e;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(245, 215, 110, 0.5);
+}
+
+.subtitle {
+    color: #dcd0ff;
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+/* تنسيق خانات الإدخال */
+.inputs-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.input-box input {
+    width: 90%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-box input::placeholder {
+    color: #b5a8d5;
+}
+
+.input-box input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 12px rgba(245, 215, 110, 0.6);
+}
+
+.error-msg {
+    color: #ff6b6b;
+    font-size: 0.95rem;
+    min-height: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* تنسيق البيضة الواحدة */
+.egg-stage {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.egg-card {
+    position: relative;
+    cursor: pointer;
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 240px;
+}
+
+.egg-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    border-color: #f5d76e;
+}
+
+.egg-card img {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(245, 215, 110, 0.6));
+    animation: floatEgg 3s ease-in-out infinite;
+}
+
+.egg-card h3 {
+    color: #f5d76e;
+    margin-top: 15px;
+    font-size: 1.3rem;
+}
+
+.click-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: #c4b5fd;
+    margin-top: 5px;
+}
+
+/* حركة طفو البيضة */
+@keyframes floatEgg {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* حركة اهتزاز البيضة قبل الكسر */
+.shake-animation img {
+    animation: shakeEgg 0.5s ease-in-out infinite !important;
+}
+
+@keyframes shakeEgg {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(8deg) scale(1.05); }
+    50% { transform: rotate(0deg) scale(1.1); }
+    75% { transform: rotate(-8deg) scale(1.05); }
+    100% { transform: rotate(0deg); }
+}
+
+/* تنسيق صندوق النتيجة */
+.result-stage {
+    display: none;
+    margin-top: 20px;
+    animation: popIn 0.6s ease forwards;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.congrats-title {
+    color: #f5d76e;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.pet-card {
+    background: rgba(0, 0, 0, 0.35);
+    border: 2px dashed #d4af37;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.pet-card img {
+    width: 160px;
+    height: auto;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    margin-bottom: 10px;
+}
+
+.pet-card h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.pet-card p {
+    color: #dcd0ff;
+    font-size: 0.95rem;
+}
+
+.sheet-status {
+    font-size: 0.9rem;
+    color: #a7f3d0;
+}
