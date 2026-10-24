@@ -6,6 +6,7 @@
     <title>متجر آل بوتر للحيوانات السحرية</title>
     <!-- خط عربي يناسب الطابع السحري -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- هنا ربط ملف الستايل عشان الألوان والتصميم يشتغلوا -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,21 +30,19 @@
         <p id="errorMsg" class="error-msg"></p>
 
         <!-- قسم البيضة الواحدة -->
-        <!-- قسم البيضة الواحدة -->
-<div class="egg-stage" id="eggStage">
-    <div class="egg-card" id="eggCard" onclick="crackEgg()">
-        <div class="glow-effect"></div>
-        <img id="eggImg" src="images/halloween_egg.png" alt="البيضة السحرية">
-        <h3>بيضة الهالوين السحرية</h3>
-        <span class="click-hint">اضغط لفتح البيضة 🪄</span>
-    </div>
-</div>
+        <div class="egg-stage" id="eggStage">
+            <div class="egg-card" id="eggCard" onclick="crackEgg()">
+                <div class="glow-effect"></div>
+                <img id="eggImg" src="images/halloween_egg.png" alt="البيضة السحرية">
+                <h3>بيضة الهالوين السحرية</h3>
+                <span class="click-hint">اضغط لفتح البيضة 🪄</span>
+            </div>
+        </div>
 
         <!-- قسم ظهور النتيجة بعد فتح البيضة -->
         <div class="result-stage" id="resultStage">
             <h2 class="congrats-title">🎉 مبروك! لقد فقست البيضة 🎉</h2>
             <div class="pet-card">
-                <!-- هنا تظهر صورة الحيوان السحري -->
                 <img id="petImg" src="" alt="حيوانك السحري">
                 <h3 id="petName"></h3>
                 <p id="petDesc"></p>
