@@ -1,104 +1,98 @@
-// 1. ضعي رابط Web App الخاص بـ Google Sheet هنا
-const SCRIPT_URL = "PUT_YOUR_GOOGLE_SHEET_WEB_APP_URL_HERE";
+// 1. Rabit el-Google Sheet Web App el-gaded el-li bahtih
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySO0Hrz5WCAE1Tz8BFLYg9wt5rDg9CBXtRaghMfS2p-SxHlA8XPql3fI0ThfpxbYYK/exec";
 
-// 2. قائمة الحيوانات السحرية مع نسبة ظهور كل حيوان (chance)
-// ملاحظة: تقدري تغيري أرقام الـ chance براحتك، كل ما الرقم كبر زادت فرصة ظهور الحيوان
+// 2. Qa'emat el-hayawanat el-sehreya m'a nesbat el-zohour (chance) w no' el-beida (eggType)
 const magicalPets = [
-    // --- فئة عادية (مجموع نسبهم 60%) ---
+    // --- Fe'ah adia (60%) ---
     { 
-        name: "بفسكين (Puffskein)", 
-        rarity: "عادي",
-        chance: 35, // نسبة الظهور 35%
+        name: "Puffskein", 
+        eggType: "Beida Adia",
+        chance: 35, 
         img: "images/puffskein.png", 
-        desc: "كائن كروي ناعم ولطيف يحبه جميع السحرة." 
+        desc: "Ka'en korawy na'em we lateef yeheboh gami' el-sahra." 
     },
     { 
-        name: "البومة الثلجية", 
-        rarity: "عادي",
-        chance: 25, // نسبة الظهور 25%
+        name: "El-Boma el-thalgeya", 
+        eggType: "Beida Adia",
+        chance: 25, 
         img: "images/owl.png", 
-        desc: "رفيق وفيّ وذكي لتوصيل الرسائل السحرية." 
+        desc: "Rafeeq wafy we zakey li-tawseel el-rasael el-sehreya." 
     },
 
-    // --- فئة نادرة (مجموع نسبهم 30%) ---
+    // --- Fe'ah nadera (30%) ---
     { 
-        name: "نيفلر (Niffler)", 
-        rarity: "نادر ✨",
-        chance: 18, // نسبة الظهور 18%
+        name: "Niffler", 
+        eggType: "Beida Nadera ✨",
+        chance: 18, 
         img: "images/niffler.png", 
-        desc: "كائن ظريف يعشق كل الأشياء اللامعة والذهب!" 
+        desc: "Ka'en zareef ye'shaq kol el-ashya' el-lame'ah we el-zahab!" 
     },
     { 
-        name: "هيبوغريف (Buckbeak)", 
-        rarity: "نادر ✨",
-        chance: 12, // نسبة الظهور 12%
+        name: "Hippogriff", 
+        eggType: "Beida Nadera ✨",
+        chance: 12, 
         img: "images/hippogriff.png", 
-        desc: "مخلوق مهيب نصفه نسر ونصفه حصان، يحترم من يحترمه." 
+        desc: "Makhlooq moheeb nesfoh nasr we nesfoh hosan, yahtarem man yahtaremoh." 
     },
 
-    // --- فئة أسطورية (مجموع نسبهم 10% فقط) ---
+    // --- Fe'ah ostoreya (10%) ---
     { 
-        name: "تنين الهورنهيل المجري", 
-        rarity: "أسطوري 🔥",
-        chance: 7, // نسبة الظهور 7%
+        name: "Teneen el-Horneel el-Maghry", 
+        eggType: "Beida Ostoreya 🔥",
+        chance: 7, 
         img: "images/dragon.png", 
-        desc: "من أقوى وأخطر المخلوقات السحرية على الإطلاق!" 
+        desc: "Min aqwa we akhtar el-makhlooqat el-sehreya 'ala el-itlaq!" 
     },
     { 
-        name: "طائر العنقاء (Fawkes)", 
-        rarity: "أسطوري 👑",
-        chance: 3, // نسبة الظهور 3% فقط (نادر جداً)
+        name: "Fawkes (El-'Anqaa')", 
+        eggType: "Beida Ostoreya 👑",
+        chance: 3, 
         img: "images/phoenix.png", 
-        desc: "كائن أسطوري خارق يتجدد من الرماد!" 
+        desc: "Ka'en ostorey khariq yatgaddad min el-ramad!" 
     }
 ];
 
 let isOpening = false;
 
-// دالة اختيار الحيوان بناءً على النسبة المئوية (Weighted Random)
+// Dala ikhtiyar el-hayawan bena'an 'ala el-nesba el-meowia
 function getPetByPercentage() {
-    // جمع كل النسب الموجودة في القائمة (حتى لو عدلتي الأرقام ومكانش مجموعهم 100 الكود هيحسبها صح تلقائياً)
     const totalChance = magicalPets.reduce((sum, pet) => sum + pet.chance, 0);
-    
-    // اختيار رقم عشوائي بين 0 ومجموع النسب
     let randomNum = Math.random() * totalChance;
 
-    // المرور على الحيوانات لاختيار الحيوان المطابق للرقم العشوائي
     for (let i = 0; i < magicalPets.length; i++) {
         if (randomNum < magicalPets[i].chance) {
             return magicalPets[i];
         }
         randomNum -= magicalPets[i].chance;
     }
-    
-    return magicalPets[0]; // احتياطي
+    return magicalPets[0];
 }
 
 function crackEgg() {
     if (isOpening) return;
 
     const nameInput = document.getElementById("wizardName");
-    const houseInput = document.getElementById("wizardHouse");
+    const ticketInput = document.getElementById("ticketNum");
     const errorMsg = document.getElementById("errorMsg");
 
     const wizardName = nameInput.value.trim();
-    const wizardHouse = houseInput.value.trim();
+    const ticketNum = ticketInput.value.trim();
 
-    if (!wizardName || !wizardHouse) {
-        errorMsg.innerText = "⚠️ تعويذة ناقصة! يرجى إدخال اسمك ومنزلك السحري أولاً.";
+    if (!wizardName || !ticketNum) {
+        errorMsg.innerText = "⚠️ Taweetha naqesa! Yarja' edkhal el-esm we raqm el-tazkara awwalan.";
         return;
     }
 
     errorMsg.innerText = "";
     isOpening = true;
     nameInput.disabled = true;
-    houseInput.disabled = true;
+    ticketInput.disabled = true;
 
     const eggCard = document.getElementById("eggCard");
     eggCard.classList.add("shake-animation");
-    document.querySelector(".click-hint").innerText = "جاري فقس البيضة... ✨";
+    document.querySelector(".click-hint").innerText = "Gary faqs el-beida... ✨";
 
-    // سحب الحيوان حسب النسبة المئوية
+    // Ikhtiyar el-hayawan bi el-nesba el-meowia
     const selectedPet = getPetByPercentage();
 
     setTimeout(() => {
@@ -109,34 +103,35 @@ function crackEgg() {
         resultStage.style.display = "block";
 
         document.getElementById("petImg").src = selectedPet.img;
-        // عرض اسم الحيوان وبجانبه درجة ندرته
-        document.getElementById("petName").innerText = `${selectedPet.name} [${selectedPet.rarity}]`;
+        document.getElementById("petName").innerText = `${selectedPet.name} (${selectedPet.eggType})`;
         document.getElementById("petDesc").innerText = selectedPet.desc;
 
-        // إرسال اسم الحيوان ودرجة ندرته إلى شيت الإكسل
-        sendToGoogleSheet(wizardName, wizardHouse, `${selectedPet.name} (${selectedPet.rarity})`);
+        // Ersal el-arbaa' a'moud le el-sheet:
+        // Name | Ticket num | Egg Type | Animal name
+        sendToGoogleSheet(wizardName, ticketNum, selectedPet.eggType, selectedPet.name);
     }, 1500);
 }
 
-function sendToGoogleSheet(name, house, pet) {
+function sendToGoogleSheet(name, ticketNum, eggType, animalName) {
     const statusText = document.getElementById("sheetStatus");
 
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("house", house);
-    formData.append("pet", pet);
+    formData.append("name", name);             // Yezehab le 'amoud Name
+    formData.append("ticketNum", ticketNum);   // Yezehab le 'amoud Ticket num
+    formData.append("eggType", eggType);       // Yezehab le 'amoud Egg Type
+    formData.append("animalName", animalName); // Yezehab le 'amoud Animal name
 
     fetch(SCRIPT_URL, {
         method: "POST",
         body: formData
     })
     .then(response => {
-        statusText.innerText = "✅ تم تسجيل حيوانك السحري في سجلات المتجر بنجاح!";
+        statusText.innerText = "✅ Tem tasgeel haywanak el-sehrey we tazkaratak fi el-segillat bengah!";
         statusText.style.color = "#a7f3d0";
     })
     .catch(error => {
         console.error("Error!", error.message);
-        statusText.innerText = "⚠️ ظهر الحيوان ولكن تعذر حفظه في السجل، تأكد من رابط الشيت.";
+        statusText.innerText = "⚠️ Zahara el-hayawan walakenn ta'azzara hefzoh fi el-segl, ta'akkady min el-rabit.";
         statusText.style.color = "#fca5a5";
     });
 }
