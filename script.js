@@ -1,28 +1,34 @@
-// 1. رابط Google Sheet Web App
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySO0Hrz5WCAE1Tz8BFLYg9wt5rDg9CBXtRaghMfS2p-SxHlA8XPql3fI0ThfpxbYYK/exec";
+// 1. رابط Google Sheet Web App الجديد
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwH8ICS5vXh8PGouoRKBC1H6bI0sWLsvO52SpVHodCClAOCV1nMlOiOK4bbfIKIHws/exec";
 
 // 2. قائمة الحيوانات السحرية (تقدري تعدلي الاسم والوصف والنسبة لكل حيوان براحتك)
 const magicalPets = [
+    // --- فئة عادية (60%) ---
     { 
-        name: "Black dog (halloween)", 
+        name: "الحيوان الأول", 
+        eggType: "بيضة عادية",
+        chance: 35, 
         img: "images/animal1.png", 
+        desc: "وصف الحيوان الأول يكتب هنا..." 
     },
     { 
-        name: "Black owl (Halloween)", 
+        name: "الحيوان الثاني", 
+        eggType: "بيضة عادية",
+        chance: 25, 
         img: "images/animal2.png", 
-         
+        desc: "وصف الحيوان الثاني يكتب هنا..." 
     },
 
     // --- فئة نادرة (30%) ---
     { 
-        name: "الحيوان الثالث (اكتبي اسمه هنا)", 
+        name: "الحيوان الثالث", 
         eggType: "بيضة نادرة ✨",
         chance: 18, 
         img: "images/animal3.png", 
         desc: "وصف الحيوان الثالث يكتب هنا..." 
     },
     { 
-        name: "الحيوان الرابع (اكتبي اسمه هنا)", 
+        name: "الحيوان الرابع", 
         eggType: "بيضة نادرة ✨",
         chance: 12, 
         img: "images/animal4.png", 
@@ -31,14 +37,14 @@ const magicalPets = [
 
     // --- فئة أسطورية (10%) ---
     { 
-        name: "الحيوان الخامس (اكتبي اسمه هنا)", 
+        name: "الحيوان الخامس", 
         eggType: "بيضة أسطورية 🔥",
         chance: 7, 
         img: "images/animal5.png", 
         desc: "وصف الحيوان الخامس يكتب هنا..." 
     },
     { 
-        name: "الحيوان السادس (اكتبي اسمه هنا)", 
+        name: "الحيوان السادس", 
         eggType: "بيضة أسطورية 👑",
         chance: 3, 
         img: "images/animal6.png", 
@@ -101,11 +107,12 @@ function crackEgg() {
         document.getElementById("petName").innerText = `${selectedPet.name} (${selectedPet.eggType})`;
         document.getElementById("petDesc").innerText = selectedPet.desc;
 
-        // إرسال الـ 3 أعمدة فقط للشيت:
+        // إرسال الـ 3 أعمدة للشيت:
         // Name | Ticket num | Animal name
         sendToGoogleSheet(wizardName, ticketNum, selectedPet.name);
     }, 1500);
 }
+
 function sendToGoogleSheet(name, ticketNum, animalName) {
     const statusText = document.getElementById("sheetStatus");
 
