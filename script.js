@@ -1,280 +1,77 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر آل بوتر للحيوانات السحرية</title>
-    <!-- خط عربي يناسب الطابع السحري -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
+const magicalPets = [
+    { 
+        name: "كلب أسود", 
+        chance: 16, 
+        img: "images/animal1.png"
+    },
+    { 
+        name: "بومة سوداء", 
+        chance: 16, 
+        img: "images/animal2.png"
+    },
+    { 
+        name: "غراب أسود", 
+        chance: 16, 
+        img: "images/animal3.png"
+    },
+    { 
+        name: "غراب", 
+        chance: 16, 
+        img: "images/animal4.png"
+    },
+    { 
+        name: "جلامبامبل", 
+        chance: 10, // أقل بحاجة بسيطة
+        img: "images/animal5.png"
+    },
+    { 
+        name: "بيلي ويج", 
+        chance: 10, // أقل بحاجة بسيطة
+        img: "images/animal6.png"
+    },
+    { 
+        name: "بومة سوداء", 
+        chance: 16, 
+        img: "images/animal7.png"
+    }
+];
+
+let isOpening = false;
+
+// دالة اختيار الحيوان بناءً على النسبة المئوية
+function getPetByPercentage() {
+    const totalChance = magicalPets.reduce((sum, pet) => sum + pet.chance, 0);
+    let randomNum = Math.random() * totalChance;
+
+    for (let i = 0; i < magicalPets.length; i++) {
+        if (randomNum < magicalPets[i].chance) {
+            return magicalPets[i];
         }
+        randomNum -= magicalPets[i].chance;
+    }
+    return magicalPets[0];
+}
 
-        body {
-            background: linear-gradient(rgba(10, 4, 25, 0.65), rgba(7, 2, 16, 0.85)), 
-                        url('images/bg.png'),
-                        radial-gradient(circle at center, #2b1055 0%, #12072b 70%, #070210 100%);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-        }
+function crackEgg() {
+    if (isOpening) return;
+    isOpening = true;
 
-        .magical-container {
-            background: rgba(20, 10, 40, 0.8);
-            border: 2px solid #d4af37;
-            border-radius: 20px;
-            padding: 35px 25px;
-            max-width: 550px;
-            width: 100%;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25), inset 0 0 20px rgba(212, 175, 55, 0.1);
-            backdrop-filter: blur(8px);
-        }
+    const eggCard = document.getElementById("eggCard");
+    eggCard.classList.add("shake-animation");
+    document.querySelector(".click-hint").innerText = "جاري فقس البيضة... ✨";
 
-        h1 {
-            color: #f5d76e;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(245, 215, 110, 0.5);
-        }
+    // اختيار الحيوان بالنسبة المئوية
+    const selectedPet = getPetByPercentage();
 
-        .subtitle {
-            color: #dcd0ff;
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-        }
+    setTimeout(() => {
+        document.getElementById("eggStage").style.display = "none";
 
-        .egg-stage {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
+        const resultStage = document.getElementById("resultStage");
+        resultStage.style.display = "block";
 
-        .egg-card {
-            position: relative;
-            cursor: pointer;
-            padding: 25px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 240px;
-            user-select: none;
-        }
-
-        .egg-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-            border-color: #f5d76e;
-        }
-
-        .egg-card img {
-            display: block;
-            margin: 0 auto;
-            width: 150px;
-            height: 150px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(245, 215, 110, 0.6));
-            animation: floatEgg 3s ease-in-out infinite;
-        }
-
-        .egg-card h3 {
-            color: #f5d76e;
-            margin-top: 15px;
-            font-size: 1.3rem;
-        }
-
-        .click-hint {
-            display: block;
-            font-size: 0.85rem;
-            color: #c4b5fd;
-            margin-top: 5px;
-        }
-
-        @keyframes floatEgg {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .shake-animation img {
-            animation: shakeEgg 0.5s ease-in-out infinite !important;
-        }
-
-        @keyframes shakeEgg {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(8deg) scale(1.05); }
-            50% { transform: rotate(0deg) scale(1.1); }
-            75% { transform: rotate(-8deg) scale(1.05); }
-            100% { transform: rotate(0deg); }
-        }
-
-        .result-stage {
-            display: none;
-            margin-top: 20px;
-            animation: popIn 0.6s ease forwards;
-        }
-
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .congrats-title {
-            color: #f5d76e;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
-
-        .pet-card {
-            background: rgba(0, 0, 0, 0.35);
-            border: 2px dashed #d4af37;
-            border-radius: 15px;
-            padding: 25px 20px;
-            margin-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .pet-card img {
-            display: block;
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
-            border-radius: 12px;
-            filter: drop-shadow(0 0 18px rgba(245, 215, 110, 0.5));
-            margin-bottom: 15px;
-        }
-
-        .pet-card h3 {
-            color: #f5d76e;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .pet-card p {
-            color: #dcd0ff;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="magical-container">
-        <h1>✨ متجر آل بوتر للحيوانات السحرية ✨</h1>
-        <p class="subtitle">اضغط على البيضة السحرية لفتحها واكتشاف حيوانك!</p>
-
-        <!-- قسم البيضة الواحدة -->
-        <div class="egg-stage" id="eggStage">
-            <div class="egg-card" id="eggCard" onclick="crackEgg()">
-                <div class="glow-effect"></div>
-                <img id="eggImg" src="images/halloween_egg.png" alt="البيضة السحرية">
-                <h3>بيضة الهالوين السحرية</h3>
-                <span class="click-hint">اضغط لفتح البيضة 🪄</span>
-            </div>
-        </div>
-
-        <!-- قسم ظهور النتيجة بعد فتح البيضة -->
-        <div class="result-stage" id="resultStage">
-            <h2 class="congrats-title">🎉 مبروك! لقد فقست البيضة 🎉</h2>
-            <div class="pet-card">
-                <img id="petImg" src="" alt="حيوانك السحري">
-                <h3 id="petName"></h3>
-                <p id="petDesc"></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- كود الجافاسكريبت مدمج هنا مباشرة لضمان فتح البيضة فوراً -->
-    <script>
-        const magicalPets = [
-            { 
-                name: "كلب أسود", 
-                chance: 16, 
-                img: "images/animal1.png"
-            },
-            { 
-                name: "بومة سوداء", 
-                chance: 16, 
-                img: "images/animal2.png"
-            },
-            { 
-                name: "غراب أسود", 
-                chance: 16, 
-                img: "images/animal3.png"
-            },
-            { 
-                name: "غراب", 
-                chance: 16, 
-                img: "images/animal4.png"
-            },
-            { 
-                name: "جلامبامبل", 
-                chance: 10, // أقل بحاجة بسيطة
-                img: "images/animal5.png"
-            },
-            { 
-                name: "بيلي ويج", 
-                chance: 10, // أقل بحاجة بسيطة
-                img: "images/animal6.png"
-            },
-            { 
-                name: "بومة سوداء", 
-                chance: 16, 
-                img: "images/animal7.png"
-            }
-        ];
-
-        let isOpening = false;
-
-        function getPetByPercentage() {
-            const totalChance = magicalPets.reduce((sum, pet) => sum + pet.chance, 0);
-            let randomNum = Math.random() * totalChance;
-
-            for (let i = 0; i < magicalPets.length; i++) {
-                if (randomNum < magicalPets[i].chance) {
-                    return magicalPets[i];
-                }
-                randomNum -= magicalPets[i].chance;
-            }
-            return magicalPets[0];
-        }
-
-        function crackEgg() {
-            if (isOpening) return;
-            isOpening = true;
-
-            const eggCard = document.getElementById("eggCard");
-            eggCard.classList.add("shake-animation");
-            document.querySelector(".click-hint").innerText = "جاري فقس البيضة... ✨";
-
-            const selectedPet = getPetByPercentage();
-
-            setTimeout(() => {
-                document.getElementById("eggStage").style.display = "none";
-
-                const resultStage = document.getElementById("resultStage");
-                resultStage.style.display = "block";
-
-                document.getElementById("petImg").src = selectedPet.img;
-                document.getElementById("petName").innerText = selectedPet.name;
-                document.getElementById("petDesc").innerText = selectedPet.desc || "";
-            }, 1500);
-        }
-    </script>
-</body>
-</html>
+        // إظهار صورة الحيوان واسمه
+        document.getElementById("petImg").src = selectedPet.img;
+        document.getElementById("petName").innerText = selectedPet.name;
+        document.getElementById("petDesc").innerText = selectedPet.desc || "";
+    }, 1500);
+}
