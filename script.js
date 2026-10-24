@@ -58,7 +58,7 @@ function crackEgg() {
 
     const eggCard = document.getElementById("eggCard");
     eggCard.classList.add("shake-animation");
-    document.querySelector(".click-hint").innerText = "جاري فقس البيضة... ✨";
+    document.querySelector(".click-hint").innerText = "جاري فتح البيضة... ";
 
     // اختيار الحيوان بالنسبة المئوية
     const selectedPet = getPetByPercentage();
