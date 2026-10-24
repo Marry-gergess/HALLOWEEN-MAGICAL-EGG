@@ -115,19 +115,12 @@ function crackEgg() {
 function sendToGoogleSheet(name, ticketNum, animalName) {
     const statusText = document.getElementById("sheetStatus");
 
-    // تجهيز البيانات بصيغة يقرأها Google Apps Script دائماً بدون مشاكل
-    const params = new URLSearchParams();
-    params.append("name", name);
-    params.append("ticketNum", ticketNum);
-    params.append("animalName", animalName);
+    // وضع البيانات داخل الرابط مباشرة لضمان وصولها 100%
+    const url = `${SCRIPT_URL}?name=${encodeURIComponent(name)}&ticketNum=${encodeURIComponent(ticketNum)}&animalName=${encodeURIComponent(animalName)}`;
 
-    fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors", // يمنع المتصفح من حظر الإرسال للشيت
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: params.toString()
+    fetch(url, {
+        method: "GET",
+        mode: "no-cors"
     })
     .then(() => {
         statusText.innerText = "✅ تم تسجيل حيوانك السحري وتذكرتك في السجلات بنجاح!";
