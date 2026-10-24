@@ -1,18 +1,13 @@
-// 1. رابط Google Sheet Web App الجديد
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwfqgEsM1yJZjbmbwY4q8GbvN86P8YWrLO7mgbaFKJ9Q62-qIfVcQkWaWK8heFQ-dEG/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-VB_ZThn4gBA-opwc0HcNwU-Ht5f0R754Ex4sf8C-qilCBfi7OvtmMoz6bo6nM5jG/exec";
 
-// 2. قائمة الحيوانات السحرية (تقدري تعدلي الاسم والوصف والنسبة لكل حيوان براحتك)
 const magicalPets = [
-    // --- فئة عادية (60%) ---
     { 
-        name: "الحيوان الأول", 
-        eggType: "بيضة عادية",
+        name: "كلب أسود", 
         chance: 35, 
         img: "images/animal1.png", 
-        desc: "وصف الحيوان الأول يكتب هنا..." 
     },
     { 
-        name: "الحيوان الثاني", 
+        name: "بومة سوداء", 
         eggType: "بيضة عادية",
         chance: 25, 
         img: "images/animal2.png", 
